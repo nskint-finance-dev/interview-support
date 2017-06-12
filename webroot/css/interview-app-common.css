@@ -1,0 +1,13 @@
+/* メニューバー分body位置を調整 */
+body {
+  margin-top: 50px;
+  margin-bottom: 60px;
+}
+
+/* 見出し */
+.page-caption {
+  padding: .25em 0 .25em .75em;
+  margin: 40px 0 20px;
+  border-left: 6px solid #337ab7;
+  border-bottom: 1px solid #eee;
+}

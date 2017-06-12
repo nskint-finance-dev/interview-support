@@ -1,0 +1,39 @@
+/* ラジオボタンは非表示にする */
+.hidden-radio input[type="radio"] {
+    display: none;
+}
+
+/* チェックされた時のスタイル */
+.hidden-radio input[type="radio"]:checked + label {
+  background: #0063A4;
+  color: #FFF; 
+}
+
+.hidden-radio input[type="radio"]:checked + label::before {
+  content: "( ";
+}
+
+.hidden-radio input[type="radio"]:checked + label::after {
+  content: " )";
+}
+
+/* マウスオーバーしたときのスタイル */
+.hidden-radio label:hover {
+  background-color: #E2EDF9; 
+}
+
+/* lableのスタイル */
+.hidden-radio{
+  vertical-align: middle;
+}
+
+.hidden-radio label{
+  color: #000;
+  border: #dddddd solid 1px;
+  height: 32px;
+  line-height: 32px;
+  min-width: 60px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 0.25em;
+}
