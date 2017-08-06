@@ -13,7 +13,7 @@
 		</div>
 		<div class="row-fluid">
 			<!-- Form -->
-			<form class="form-inline" action="add" method="POST">
+			<form class="form-inline" action="/interview-support/users/add" method="POST">
 				<div class="input-group col-md-5">
 					<span class="input-group-addon">ユーザー</span>
 					<input type="text" class="form-control" name="username" placeholder="ユーザー">
@@ -25,13 +25,21 @@
 				<button type="submit" class="btn btn-primary btn-md">登録</button>
 			</form>
 		</div>
-		
 
-		<!-- 一覧 -->
+
+		<!-- 一覧見出し -->
 		<div class="page-caption">
 			ユーザー一覧
 		</div>
 
+		<!-- ページ送り -->
+		<div class="pagenator">
+			<?= $this->Paginator->first('最初'); ?>
+			<?= $this->Paginator->numbers(['modulus' => 2]); ?>
+			<?= $this->Paginator->last('最後'); ?>
+		</div>
+
+		<!-- 一覧 -->
 		<div class="row-fluid">
 			<table class="table table-bordered table-hover table-striped">
 				<thead>
@@ -40,18 +48,11 @@
 					</tr>
 				</thead>
 				<tbody>
+					<?php foreach($users as $user): ?>
 					<tr>
-						<td>naganuma</td>
+						<td><?php echo h($user['username']); ?></td>
 					</tr>
-					<tr>
-						<td>naganuma</td>
-					</tr>
-					<tr>
-						<td>naganuma</td>
-					</tr>
-					<tr>
-						<td>naganuma</td>
-					</tr>
+					<?php endforeach; ?>
 				</tbody>
 			</table>
 		</div>

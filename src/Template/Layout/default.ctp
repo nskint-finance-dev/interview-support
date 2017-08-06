@@ -60,6 +60,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 					<!-- 通常のリンク -->
 					<li><a href="#">ビジネス基礎チェック表</a></li>
 					<li><a href="#">金融図書館貸出管理</a></li>
+					<li><?php echo $this->Html->link(
+						'ユーザー管理', array(
+							'controller' => 'users',
+							'action' => 'index',
+						)
+					);?></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

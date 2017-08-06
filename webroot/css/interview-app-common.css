@@ -1,13 +1,30 @@
-/* ƒƒjƒ…[ƒo[•ªbodyˆÊ’u‚ð’²® */
+/* ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒ¼åˆ†bodyä½ç½®ã‚’èª¿æ•´ */
 body {
   margin-top: 50px;
   margin-bottom: 60px;
 }
 
-/* Œ©o‚µ */
+/* è¦‹å‡ºã— */
 .page-caption {
   padding: .25em 0 .25em .75em;
   margin: 40px 0 20px;
   border-left: 6px solid #337ab7;
   border-bottom: 1px solid #eee;
+}
+
+/* ãƒšãƒ¼ã‚¸é€ã‚Š */
+div .pagenator {
+text-align: right;
+}
+
+div .pagenator li {
+  display: inline;
+  padding-left: 4px;
+  padding-right: 4px;
+  text-decoration: underline;
+}
+
+div .pagenator > .active {
+  pointer-events: none;
+  text-decoration: none;
 }

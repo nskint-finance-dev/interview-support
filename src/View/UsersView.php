@@ -5,7 +5,6 @@ use Cake\View\View;
 
 /**
  * Users View
- *
  */
 class UsersView extends AppView
 {
@@ -21,5 +20,8 @@ class UsersView extends AppView
      */
     public function initialize()
     {
+        $this->loadHelper('Paginator', [
+            'templates' => 'paginator-templates'
+        ]);
     }
 }

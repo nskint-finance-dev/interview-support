@@ -6,6 +6,23 @@ use Cake\Event\Event;
 
 class UsersController extends AppController
 {
+    public $paginate = [
+        'limit' => 5,
+        'order' => [
+            'Users.id' => 'desc'
+        ]
+    ];
+
+    /**
+     * 初期化処理.
+     *
+     * @return void
+     */
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Paginator');
+    }
 
     /**
      * フィルター.
@@ -14,10 +31,12 @@ class UsersController extends AppController
      */
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['add', 'logout']);
+        $this->Auth->allow([
+            'add',
+            'logout'
+        ]);
     }
-    
-    
+
     /**
      * よくわかんない.
      *
@@ -25,7 +44,7 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $this->set('users', $this->Users->find('all'));
+        $this->set('users', $this->paginate());
     }
 
     /**
@@ -46,7 +65,7 @@ class UsersController extends AppController
             $this->Flash->error(__('Invalid username or password, try again'));
         }
     }
-    
+
     /**
      * ログアウト.
      *
@@ -57,17 +76,6 @@ class UsersController extends AppController
         $this->viewBuilder()->layout(false);
         $this->Flash->success(__('ログアウトしました。'));
         return $this->redirect($this->Auth->logout());
-    }
-    
-    /**
-     * よくわかんない.
-     *
-     * @return void
-     */
-    public function view($id)
-    {
-        $user = $this->Users->get($id);
-        $this->set(compact('user'));
     }
 
     /**
@@ -82,11 +90,11 @@ class UsersController extends AppController
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('ユーザーを登録しました。'));
-                return $this->redirect(['action' => 'add']);
+            } else {
+                $this->Flash->error(__('ユーザーを登録できませんでした。'));
             }
-            $this->Flash->error(__('ユーザーを登録できませんでした。'));
         }
-        $this->set('user', $user);
+        $this->set('users', $this->paginate());
+        $this->render('/users/index');
     }
-
 }
