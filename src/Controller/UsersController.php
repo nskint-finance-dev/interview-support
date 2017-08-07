@@ -95,6 +95,6 @@ class UsersController extends AppController
             }
         }
         $this->set('users', $this->paginate());
-        $this->render('/users/index');
+        $this->render('index');
     }
 }
