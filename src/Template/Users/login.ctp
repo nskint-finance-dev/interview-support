@@ -26,24 +26,29 @@
 		<div class="page-header">
 			<h2>技術向上プロジェクト</h2>
 		</div>
-		
+
 		<!-- 見出し-新規登録 -->
 		<div class="page-caption">
 			ログイン
 		</div>
 		<!-- Form -->
 		<div class="row-fluid form-group">
-			<form class="form-horizontal" action="login" method="POST">
+			<!-- Form -->
+			<?php echo $this->Form->create(null, [
+				'url' => ['action' => 'login'],
+				'type' => 'post',
+				'class' => 'form-horizontal'
+			]); ?>
 				<div class="form-group">
 					<label class="col-sm-1 control-label" for="user">ユーザー</label>
 					<div class="col-sm-3">
-						<input type="text" class="form-control" name="username" placeholder="ユーザー">
+						<?php echo $this->Form->text('username', ['class' => 'form-control', 'placeholder' => 'ユーザー名を入力してください']);?>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-1 control-label" for="InputPassword">パスワード</label>
 					<div class="col-sm-3">
-						<input type="password" class="form-control" name="password" placeholder="パスワード">
+						<?php echo $this->Form->password('password', ['class' => 'form-control', 'placeholder' => 'パスワードを入力してください']);?>
 					</div>
 				</div>
 				<div class="form-group">

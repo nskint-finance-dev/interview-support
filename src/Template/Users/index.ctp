@@ -13,14 +13,18 @@
 		</div>
 		<div class="row-fluid">
 			<!-- Form -->
-			<form class="form-inline" action="/interview-support/users/add" method="POST">
+			<?php echo $this->Form->create(null, [
+				'url' => ['action' => 'add'],
+				'type' => 'post',
+				'class' => 'form-inline'
+			]); ?>
 				<div class="input-group col-md-5">
-					<span class="input-group-addon">ユーザー</span>
-					<input type="text" class="form-control" name="username" placeholder="ユーザー">
+					<span class="input-group-addon">ユーザー名</span>
+					<?php echo $this->Form->text('username', ['class' => 'form-control', 'placeholder' => 'ユーザー名を入力してください']);?>
 				</div>
 				<div class="input-group col-md-5">
 					<span class="input-group-addon">パスワード</span>
-					<input type="password" class="form-control" name="password" placeholder="パスワード">
+					<?php echo $this->Form->password('password', ['class' => 'form-control', 'placeholder' => 'パスワードを入力してください']);?>
 				</div>
 				<button type="submit" class="btn btn-primary btn-md">登録</button>
 			</form>
@@ -44,7 +48,7 @@
 			<table class="table table-bordered table-hover table-striped">
 				<thead>
 					<tr>
-						<th>ユーザー</th>
+						<th>ユーザー名</th>
 					</tr>
 				</thead>
 				<tbody>

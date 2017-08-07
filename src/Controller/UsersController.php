@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller;
 
-use App\Controller\AppController;
 use Cake\Event\Event;
 
 class UsersController extends AppController
@@ -32,13 +31,12 @@ class UsersController extends AppController
     public function beforeFilter(Event $event)
     {
         $this->Auth->allow([
-            'add',
             'logout'
         ]);
     }
 
     /**
-     * よくわかんない.
+     * index.
      *
      * @return void
      */
@@ -62,7 +60,9 @@ class UsersController extends AppController
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error(__('Invalid username or password, try again'));
+            $this->Flash->error(__('ユーザー名またはパスワードが間違っています。'));
+            // 入力クリア
+            $this->request->data = null;
         }
     }
 
