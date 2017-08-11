@@ -25,7 +25,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php echo $this->Html->css('bootstrap.min.css') ?>
-    <?php echo $this->Html->css('base.css') ?>
     <?php echo $this->Html->css('cake.css') ?>
     <?php echo $this->Html->css('interview-app-common.css') ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

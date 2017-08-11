@@ -1,5 +1,5 @@
 /* メニューバー分body位置を調整 */
-body {
+body{
   margin-top: 50px;
   margin-bottom: 60px;
 }
@@ -27,4 +27,20 @@ div .pagenator li {
 div .pagenator > .active {
   pointer-events: none;
   text-decoration: none;
+}
+
+.p-top-15 {
+  padding-top: 15px;
+}
+
+.p-bottom-15 {
+  padding-bottom: 15px;
+}
+
+.p-left-15 {
+  padding-left: 15px;
+}
+
+.p-right-15 {
+  padding-right: 15px;
 }

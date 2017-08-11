@@ -2,11 +2,13 @@
 namespace App\Controller;
 
 use Cake\Event\Event;
+use Cake\I18n\Time;
 
 class UsersController extends AppController
 {
+
     public $paginate = [
-        'limit' => 5,
+        'limit' => 10,
         'order' => [
             'Users.id' => 'desc'
         ]
@@ -20,7 +22,7 @@ class UsersController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent('Paginator');
+        $this->loadComponent(['Paginator', 'Security']);
     }
 
     /**
@@ -42,6 +44,8 @@ class UsersController extends AppController
      */
     public function index()
     {
+        $user = $this->Users->newEntity();
+        $this->set('user', $user);
         $this->set('users', $this->paginate());
     }
 
@@ -52,15 +56,14 @@ class UsersController extends AppController
      */
     public function login()
     {
-        $this->viewBuilder()->layout(false);
+        $this->viewBuilder()->setLayout(false);
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
-            echo $user;
             if ($user) {
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error(__('ユーザー名またはパスワードが間違っています。'));
+            $this->Flash->error(__('ログイン情報に誤りがあります。'));
             // 入力クリア
             $this->request->data = null;
         }
@@ -73,7 +76,7 @@ class UsersController extends AppController
      */
     public function logout()
     {
-        $this->viewBuilder()->layout(false);
+        $this->viewBuilder()->setLayout(false);
         $this->Flash->success(__('ログアウトしました。'));
         return $this->redirect($this->Auth->logout());
     }
@@ -88,13 +91,20 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            $user->set([
+                'created_user' => $this->request->session()->read('Auth.User.username'),
+                'created' => Time::now('Asia/Tokyo'),
+                'modified_user' => $this->request->session()->read('Auth.User.username'),
+                'modified' => Time::now('Asia/Tokyo'),
+            ]);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('ユーザーを登録しました。'));
+                $this->Flash->success('ユーザーを登録しました。');
             } else {
-                $this->Flash->error(__('ユーザーを登録できませんでした。'));
+                $this->Flash->error('ユーザーを登録できませんでした。');
             }
         }
         $this->set('users', $this->paginate());
+        $this->set('user', $user);
         $this->render('index');
     }
 }
