@@ -22,7 +22,7 @@ class UsersController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent(['Paginator', 'Security']);
+        $this->loadComponent('Paginator');
     }
 
     /**
