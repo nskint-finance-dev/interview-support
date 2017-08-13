@@ -10,7 +10,7 @@ class UsersController extends AppController
     public $paginate = [
         'limit' => 10,
         'order' => [
-            'Users.id' => 'desc'
+            'Users.id' => 'asc'
         ]
     ];
 
@@ -33,8 +33,10 @@ class UsersController extends AppController
     public function beforeFilter(Event $event)
     {
         $this->Auth->allow([
-            'logout'
+            'logout',
+            'add'
         ]);
+        $this->viewBuilder()->setLayout(false);
     }
 
     /**
@@ -56,11 +58,12 @@ class UsersController extends AppController
      */
     public function login()
     {
-        $this->viewBuilder()->setLayout(false);
         if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            if ($user) {
-                $this->Auth->setUser($user);
+            $requestData = $this->request->getData();
+            $exist = $this->Users->findById($requestData['id'])->first();
+
+            if ($exist) {
+                $this->Auth->setUser($exist);
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error(__('ログイン情報に誤りがあります。'));
@@ -76,7 +79,6 @@ class UsersController extends AppController
      */
     public function logout()
     {
-        $this->viewBuilder()->setLayout(false);
         $this->Flash->success(__('ログアウトしました。'));
         return $this->redirect($this->Auth->logout());
     }
@@ -90,19 +92,32 @@ class UsersController extends AppController
     {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            $user->set([
-                'created_user' => $this->request->session()->read('Auth.User.username'),
-                'created' => Time::now('Asia/Tokyo'),
-                'modified_user' => $this->request->session()->read('Auth.User.username'),
-                'modified' => Time::now('Asia/Tokyo'),
-            ]);
-            if ($this->Users->save($user)) {
-                $this->Flash->success('ユーザーを登録しました。');
+            // idが既に登録済みでないかチェックする
+            $requestData = $this->request->getData();
+            $exist = $this->Users->findById($requestData['id'])->first();
+
+            // idが登録済みでない場合、登録処理に進む
+            if (! $exist) {
+                $user = $this->Users->patchEntity($user, $this->request->getData());
+                $user->set([
+                    'created_user' => $this->Auth->user('username'),
+                    'created' => Time::now('Asia/Tokyo'),
+                    'modified_user' => $this->Auth->user('username'),
+                    'modified' => Time::now('Asia/Tokyo')
+                ]);
+                if ($this->Users->save($user)) {
+                    $this->Flash->success('ユーザーを登録しました。');
+                } else {
+                    $this->Flash->error('ユーザーを登録できませんでした。');
+                }
             } else {
-                $this->Flash->error('ユーザーを登録できませんでした。');
+                // idが登録済みだった場合
+                $this->Flash->error('ユーザーが既に登録されています。');
             }
+            // 入力クリア
+            $this->request->data = null;
         }
+
         $this->set('users', $this->paginate());
         $this->set('user', $user);
         $this->render('index');

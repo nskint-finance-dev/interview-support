@@ -17,16 +17,13 @@ div .pagenator {
 text-align: right;
 }
 
-div .pagenator li {
-  display: inline;
-  padding-left: 4px;
-  padding-right: 4px;
-  text-decoration: underline;
-}
-
-div .pagenator > .active {
+div .pagination > .active {
   pointer-events: none;
   text-decoration: none;
+}
+
+div .error-message {
+  color: #ff0000;
 }
 
 .p-top-15 {

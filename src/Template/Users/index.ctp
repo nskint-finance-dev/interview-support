@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
+<head>
+    <?= $this->Html->charset() ?>
+    <title>
+        技術向上プロジェクト
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php echo $this->Html->css('bootstrap.min.css') ?>
+    <?php echo $this->Html->css('interview-app-common.css') ?>
+    <?php echo $this->Html->css('cake.css') ?>
+</head>
 <body>
     <div id="body" class="container-fluid">
 
@@ -19,9 +30,18 @@
                 'class' => 'form-horizontal'
             ]); ?>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">ユーザー</label>
+                    <label class="col-sm-2 control-label">社員番号</label>
                     <div class="col-sm-5">
-                        <?php echo $this->Form->text('username', ['class' => 'form-control', 'placeholder' => 'ユーザー名を入力してください', 'maxLength' => '50', 'required' => true]);?>
+                        <?php echo $this->Form->text('id', ['class' => 'form-control', 'placeholder' => '社員番号を入力してください', 'maxLength' => '10', 'required' => true, 'autocomplete' => 'off']);?>
+                    </div>
+                    <div class="error-message col-sm-12">
+                        <?php echo $this->Form->error('id');?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">名前</label>
+                    <div class="col-sm-5">
+                        <?php echo $this->Form->text('username', ['class' => 'form-control', 'placeholder' => '名前を入力してください', 'maxLength' => '50', 'required' => true, 'autocomplete' => 'off']);?>
                     </div>
                     <div class="error-message col-sm-12">
                         <?php echo $this->Form->error('username');?>
@@ -30,7 +50,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">パスワード</label>
                     <div class="col-sm-5">
-                        <?php echo $this->Form->password('password', ['class' => 'form-control', 'placeholder' => 'パスワードを入力してください', 'maxLength' => '50', 'required' => true]);?>
+                        <?php echo $this->Form->password('password', ['class' => 'form-control', 'placeholder' => 'パスワードを入力してください', 'maxLength' => '50', 'required' => true, 'autocomplete' => 'off', 'value' => 'password']);?>
                     </div>
                     <div class="error-message col-sm-12">
                         <?php echo $this->Form->error('password');?>
@@ -49,7 +69,7 @@
         </div>
 
         <!-- ページ送り -->
-        <div class="pagenator">
+        <div class="pagination">
             <?= $this->Paginator->first('最初'); ?>
             <?= $this->Paginator->numbers(['modulus' => 2]); ?>
             <?= $this->Paginator->last('最後'); ?>

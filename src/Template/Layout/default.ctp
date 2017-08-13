@@ -24,11 +24,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php echo $this->Html->css('bootstrap.min.css') ?>
     <?php echo $this->Html->css('cake.css') ?>
+    <?php echo $this->Html->css('bootstrap.min.css') ?>
     <?php echo $this->Html->css('interview-app-common.css') ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <?php echo $this->Html->script('bootstrap.min') ?>
+    <?php echo $this->Html->script('jquery.smooth-scroll.min') ?>
+    <?php echo $this->Html->script('jquery.smooth-scroll.customize') ?>
 </head>
 <body>
     <!-- Header -->
@@ -55,14 +57,19 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <!-- 各ナビゲーションメニュー -->
                 <ul class="nav navbar-nav">
                     <!-- 通常のリンク -->
-                    <li><a href="#">ビジネス基礎チェック表</a></li>
-                    <li><a href="#">金融図書館貸出管理</a></li>
                     <li><?php echo $this->Html->link(
-                        'ユーザー管理', array(
-                            'controller' => 'users',
+                        'ビジネス基礎チェック', array(
+                            'controller' => 'CheckResult',
                             'action' => 'index',
                         )
                     );?></li>
+                    <li><a href="#">金融図書館貸出管理</a></li>
+<!--                     <li><?php echo $this->Html->link(
+                        'ユーザー管理', array(
+                            'controller' => 'Users',
+                            'action' => 'index',
+                        )
+                    );?></li> -->
                 </ul>
 
                 <!-- ログイン情報 -->

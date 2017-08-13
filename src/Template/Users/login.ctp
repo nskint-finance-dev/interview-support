@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<head>
     <?= $this->Html->charset() ?>
     <title>
         技術向上プロジェクト
@@ -32,21 +31,18 @@
         <div class="row-fluid form-group">
             <!-- Form -->
             <?php echo $this->Form->create(null, [
-                'url' => ['action' => 'login'],
+                'url' => ['controller' => 'users', 'action' => 'login'],
                 'type' => 'post',
-                'class' => 'form-horizontal'
+                'class' => 'form-horizontal',
             ]); ?>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="user">ユーザー</label>
+                    <label class="col-sm-2 control-label">社員番号</label>
                     <div class="col-sm-5">
-                        <?php echo $this->Form->text('username', ['class' => 'form-control', 'placeholder' => 'ユーザー名を入力してください', 'maxLength' => '50', 'required' => true]);?>
+                        <?php echo $this->Form->text('id', ['class' => 'form-control', 'placeholder' => '社員番号を入力してください', 'maxLength' => '50', 'required' => true]);?>
+                        <?php echo $this->Form->hidden('password',['value' => 'password']);?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="InputPassword">パスワード</label>
-                    <div class="col-sm-5">
-                        <?php echo $this->Form->password('password', ['class' => 'form-control', 'placeholder' => 'パスワードを入力してください', 'maxLength' => '50', 'required' => true]);?>
-                    </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-7 p-left-15">
